@@ -80,56 +80,63 @@ const experiences: ExperienceItem[] = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-16 bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="experience" className="py-16 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Work Experience</h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400">
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-3">
+            Work <span className="text-blue-600 dark:text-cyan-400">Experience</span>
+          </h2>
+          <div className="w-20 h-1 mx-auto bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full mb-4"></div>
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             My professional journey and career milestones
           </p>
         </motion.div>
 
-        <div className="grid gap-8">
+        <div className="space-y-8">
           {experiences.map((exp, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ y: -5 }}
+              transition={{ 
+                duration: 0.5,
+                delay: index * 0.1
+              }}
               viewport={{ once: true }}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-shadow"
+              className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
             >
-              <div className="p-6">
-                {/* Header */}
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="p-3 rounded-lg bg-blue-50 dark:bg-gray-700 text-blue-600 dark:text-cyan-400">
-                    <Briefcase size={20} />
+              <div className="p-8">
+                {/* Header with your original job title and company */}
+                <div className="flex items-start gap-5 mb-5">
+                  <div className="p-3 rounded-xl bg-blue-100 dark:bg-gray-700 text-blue-600 dark:text-cyan-400">
+                    <Briefcase size={22} />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-800 dark:text-white">{exp.title}</h3>
-                    <h4 className="text-lg font-medium text-blue-600 dark:text-cyan-400">{exp.company}</h4>
+                    <h3 className="text-2xl font-bold text-gray-800 dark:text-white">{exp.title}</h3>
+                    <h4 className="text-xl font-medium text-blue-600 dark:text-cyan-400">{exp.company}</h4>
                   </div>
                 </div>
 
-                {/* Period */}
-                <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400 mb-6">
-                  <CalendarDays size={16} />
-                  <span>{exp.period}</span>
+                {/* Period with your original dates */}
+                <div className="flex items-center gap-3 text-gray-600 dark:text-gray-400 mb-6">
+                  <CalendarDays size={18} className="text-blue-500 dark:text-cyan-400" />
+                  <span className="text-sm font-medium">{exp.period}</span>
                 </div>
 
-                {/* Responsibilities */}
-                <div className="mb-6">
-                  <h4 className="font-semibold text-gray-700 dark:text-gray-300 mb-3 flex items-center gap-2">
-                    <Cpu size={16} className="text-blue-500 dark:text-cyan-400" />
+                {/* Your original responsibilities list */}
+                <div className="mb-8">
+                  <h4 className="font-semibold text-lg text-gray-700 dark:text-gray-300 mb-4 flex items-center gap-3">
+                    <Cpu size={18} className="text-blue-500 dark:text-cyan-400" />
                     Key Responsibilities
                   </h4>
-                  <ul className="space-y-2">
+                  <ul className="space-y-3 pl-2">
                     {exp.responsibilities.map((item, i) => (
                       <motion.li
                         key={`resp-${i}`}
@@ -137,23 +144,23 @@ export default function Experience() {
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.3, delay: 0.2 + i * 0.05 }}
                         viewport={{ once: true }}
-                        className="flex items-start gap-2 text-gray-600 dark:text-gray-400"
+                        className="flex items-start gap-3 text-gray-600 dark:text-gray-400"
                       >
-                        <span className="text-blue-500 dark:text-cyan-400 mt-1">•</span>
+                        <span className="text-blue-500 dark:text-cyan-400 mt-1.5">•</span>
                         <span>{item}</span>
                       </motion.li>
                     ))}
                   </ul>
                 </div>
 
-                {/* Skills */}
+                {/* Your original skills list */}
                 {exp.skills && (
-                  <div className="mb-6">
-                    <h4 className="font-semibold text-gray-700 dark:text-gray-300 mb-3 flex items-center gap-2">
-                      <Code2 size={16} className="text-blue-500 dark:text-cyan-400" />
+                  <div className="mb-8">
+                    <h4 className="font-semibold text-lg text-gray-700 dark:text-gray-300 mb-4 flex items-center gap-3">
+                      <Code2 size={18} className="text-blue-500 dark:text-cyan-400" />
                       Skills Applied
                     </h4>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-3">
                       {exp.skills.map((skill, i) => (
                         <motion.span
                           key={`skill-${i}`}
@@ -161,7 +168,7 @@ export default function Experience() {
                           whileInView={{ opacity: 1, scale: 1 }}
                           transition={{ duration: 0.3, delay: 0.3 + i * 0.05 }}
                           viewport={{ once: true }}
-                          className="inline-block bg-blue-50 dark:bg-gray-700 px-3 py-1 rounded-full text-sm text-blue-700 dark:text-cyan-400"
+                          className="inline-block bg-blue-50 dark:bg-gray-700 px-4 py-1.5 rounded-full text-sm font-medium text-blue-700 dark:text-cyan-400"
                         >
                           {skill}
                         </motion.span>
@@ -170,14 +177,14 @@ export default function Experience() {
                   </div>
                 )}
 
-                {/* Achievements */}
+                {/* Your original achievements list */}
                 {exp.achievements && (
                   <div>
-                    <h4 className="font-semibold text-gray-700 dark:text-gray-300 mb-3 flex items-center gap-2">
-                      <CheckCircle size={16} className="text-green-500 dark:text-emerald-400" />
+                    <h4 className="font-semibold text-lg text-gray-700 dark:text-gray-300 mb-4 flex items-center gap-3">
+                      <CheckCircle size={18} className="text-green-500 dark:text-emerald-400" />
                       Key Achievements
                     </h4>
-                    <ul className="space-y-2">
+                    <ul className="space-y-3 pl-2">
                       {exp.achievements.map((item, i) => (
                         <motion.li
                           key={`achieve-${i}`}
@@ -185,9 +192,9 @@ export default function Experience() {
                           whileInView={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.3, delay: 0.4 + i * 0.05 }}
                           viewport={{ once: true }}
-                          className="flex items-start gap-2 text-gray-600 dark:text-gray-400"
+                          className="flex items-start gap-3 text-gray-600 dark:text-gray-400"
                         >
-                          <span className="text-green-500 dark:text-emerald-400 mt-1">•</span>
+                          <span className="text-green-500 dark:text-emerald-400 mt-1.5">•</span>
                           <span>{item}</span>
                         </motion.li>
                       ))}

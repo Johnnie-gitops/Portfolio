@@ -7,6 +7,9 @@ import Certifications from './(main)/components/Certifications'
 import Contact from './(main)/components/Contact'
 import Footer from './(main)/components/Footer'
 import Education from './(main)/components/Education'
+import LanguageSkills from './(main)/components/LanguageSkills'
+import Navbar from './(main)/components/Navbar'
+
 
 export default function Home() {
   return (
@@ -18,6 +21,7 @@ export default function Home() {
         <About />
         <Education />
         <Experience />
+        <LanguageSkills />
         <Skills />
         <Contact />
       </main>
