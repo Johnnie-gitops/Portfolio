@@ -18,7 +18,7 @@ const languages: Language[] = [
   },
   {
     name: "English",
-    level: "Basically Fluent",
+    level: "Basic",
     proficiency: 40,
     icon: "🇬🇧",
   },
