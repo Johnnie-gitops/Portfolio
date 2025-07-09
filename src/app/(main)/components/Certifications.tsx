@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Server, Shield, Lock, Globe, BarChart2, Key } from "lucide-react";
+import { Server, Shield, Lock, Globe, BarChart2 } from "lucide-react"; // Removed unused Key import
 
 interface Certification {
   title: string;
@@ -48,6 +48,7 @@ export default function Certifications() {
       location: "Lao PDR",
       icon: <BarChart2 className="w-5 h-5" />,
     },
+    // Uncomment if you want to include this certification
     // {
     //   title: "Lao Digital Week",
     //   organization: "IPv6 Security Tutorial",
