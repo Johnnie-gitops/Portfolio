@@ -40,7 +40,7 @@ export default function Hero() {
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
                 Hi, I&apos;m{" "}
                 <span className="text-blue-600 dark:text-blue-400">Johnny</span>{" "}
-                This is My Portfolio
+                Outhathonglid
               </h1>
 
               <h2 className="text-xl md:text-2xl font-medium text-gray-600 dark:text-gray-300 mb-6">
