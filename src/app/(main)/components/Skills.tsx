@@ -125,7 +125,7 @@ export default function Skills() {
           ))}
         </div>
 
-        <div className="mt-12 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-100 dark:border-gray-700">
+        {/* <div className="mt-12 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-100 dark:border-gray-700">
           <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-6 flex items-center gap-2">
             <span>📈</span> Skill Progression
           </h3>
@@ -158,7 +158,7 @@ export default function Skills() {
               </motion.div>
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   )
