@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { Briefcase, CalendarDays, CheckCircle, Code2, Cpu } from 'lucide-react'
 
 interface ExperienceItem {
   title: string;
@@ -78,54 +79,57 @@ const experiences: ExperienceItem[] = [
 ]
 
 export default function Experience() {
-  const cardGradients = [
-    'from-blue-50 to-cyan-50 dark:from-gray-700 dark:to-gray-800',
-    'from-purple-50 to-indigo-50 dark:from-gray-700 dark:to-gray-800',
-    'from-green-50 to-emerald-50 dark:from-gray-700 dark:to-gray-800',
-    'from-amber-50 to-orange-50 dark:from-gray-700 dark:to-gray-800'
-  ]
-
   return (
     <section id="experience" className="py-16 bg-gray-50 dark:bg-gray-900">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.h2
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white"
+          className="text-center mb-12"
         >
-          Professional Experience
-        </motion.h2>
-        
-        <div className="space-y-8">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Work Experience</h2>
+          <p className="text-lg text-gray-600 dark:text-gray-400">
+            My professional journey and career milestones
+          </p>
+        </motion.div>
+
+        <div className="grid gap-8">
           {experiences.map((exp, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              className={`bg-gradient-to-br ${cardGradients[index % cardGradients.length]} p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow`}
+              viewport={{ once: true }}
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-shadow"
             >
-              <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
-                <div>
-                  <h3 className="text-xl font-semibold text-primary dark:text-cyan-400">
-                    {exp.title}
-                  </h3>
-                  <h4 className="text-lg font-medium text-dark dark:text-white">
-                    {exp.company}
-                  </h4>
+              <div className="p-6">
+                {/* Header */}
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="p-3 rounded-lg bg-blue-50 dark:bg-gray-700 text-blue-600 dark:text-cyan-400">
+                    <Briefcase size={20} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-800 dark:text-white">{exp.title}</h3>
+                    <h4 className="text-lg font-medium text-blue-600 dark:text-cyan-400">{exp.company}</h4>
+                  </div>
                 </div>
-                <span className="text-gray-600 dark:text-gray-300 mt-2 md:mt-0 bg-white/50 dark:bg-gray-800/50 px-3 py-1 rounded-full text-sm">
-                  {exp.period}
-                </span>
-              </div>
-              
-              <div className="space-y-4">
-                <div>
-                  <h4 className="font-medium text-gray-700 dark:text-gray-300 mb-2">Key Responsibilities:</h4>
-                  <ul className="space-y-2 pl-5">
+
+                {/* Period */}
+                <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400 mb-6">
+                  <CalendarDays size={16} />
+                  <span>{exp.period}</span>
+                </div>
+
+                {/* Responsibilities */}
+                <div className="mb-6">
+                  <h4 className="font-semibold text-gray-700 dark:text-gray-300 mb-3 flex items-center gap-2">
+                    <Cpu size={16} className="text-blue-500 dark:text-cyan-400" />
+                    Key Responsibilities
+                  </h4>
+                  <ul className="space-y-2">
                     {exp.responsibilities.map((item, i) => (
                       <motion.li
                         key={`resp-${i}`}
@@ -133,17 +137,22 @@ export default function Experience() {
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.3, delay: 0.2 + i * 0.05 }}
                         viewport={{ once: true }}
-                        className="text-gray-700 dark:text-gray-300 relative before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:rounded-full before:bg-primary dark:before:bg-cyan-400 pl-4"
+                        className="flex items-start gap-2 text-gray-600 dark:text-gray-400"
                       >
-                        {item}
+                        <span className="text-blue-500 dark:text-cyan-400 mt-1">•</span>
+                        <span>{item}</span>
                       </motion.li>
                     ))}
                   </ul>
                 </div>
 
+                {/* Skills */}
                 {exp.skills && (
-                  <div>
-                    <h4 className="font-medium text-gray-700 dark:text-gray-300 mb-2">Skills Applied:</h4>
+                  <div className="mb-6">
+                    <h4 className="font-semibold text-gray-700 dark:text-gray-300 mb-3 flex items-center gap-2">
+                      <Code2 size={16} className="text-blue-500 dark:text-cyan-400" />
+                      Skills Applied
+                    </h4>
                     <div className="flex flex-wrap gap-2">
                       {exp.skills.map((skill, i) => (
                         <motion.span
@@ -152,7 +161,7 @@ export default function Experience() {
                           whileInView={{ opacity: 1, scale: 1 }}
                           transition={{ duration: 0.3, delay: 0.3 + i * 0.05 }}
                           viewport={{ once: true }}
-                          className="inline-block bg-white/70 dark:bg-gray-800/70 px-3 py-1 rounded-full text-sm text-gray-700 dark:text-gray-300 shadow-sm"
+                          className="inline-block bg-blue-50 dark:bg-gray-700 px-3 py-1 rounded-full text-sm text-blue-700 dark:text-cyan-400"
                         >
                           {skill}
                         </motion.span>
@@ -161,10 +170,14 @@ export default function Experience() {
                   </div>
                 )}
 
+                {/* Achievements */}
                 {exp.achievements && (
                   <div>
-                    <h4 className="font-medium text-gray-700 dark:text-gray-300 mb-2">Key Achievements:</h4>
-                    <ul className="space-y-2 pl-5">
+                    <h4 className="font-semibold text-gray-700 dark:text-gray-300 mb-3 flex items-center gap-2">
+                      <CheckCircle size={16} className="text-green-500 dark:text-emerald-400" />
+                      Key Achievements
+                    </h4>
+                    <ul className="space-y-2">
                       {exp.achievements.map((item, i) => (
                         <motion.li
                           key={`achieve-${i}`}
@@ -172,9 +185,10 @@ export default function Experience() {
                           whileInView={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.3, delay: 0.4 + i * 0.05 }}
                           viewport={{ once: true }}
-                          className="text-gray-700 dark:text-gray-300 relative before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:rounded-full before:bg-green-500 dark:before:bg-emerald-400 pl-4"
+                          className="flex items-start gap-2 text-gray-600 dark:text-gray-400"
                         >
-                          {item}
+                          <span className="text-green-500 dark:text-emerald-400 mt-1">•</span>
+                          <span>{item}</span>
                         </motion.li>
                       ))}
                     </ul>
