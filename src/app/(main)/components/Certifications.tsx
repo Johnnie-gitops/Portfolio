@@ -106,13 +106,6 @@ export default function Certifications() {
                   </div>
                 </div>
               </div>
-              <motion.div 
-                className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent dark:via-cyan-400/30"
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                viewport={{ once: true }}
-              />
             </motion.div>
           ))}
         </div>
