@@ -1,48 +1,45 @@
 "use client";
 
 import { motion } from "framer-motion";
+import "flag-icons/css/flag-icons.min.css";
 
 interface Language {
   name: string;
+  nativeName: string;
   level: string;
   proficiency: number;
-  icon: string;
+  countryCode: string; // ISO 3166-1 alpha-2 for flag-icons
 }
 
 const languages: Language[] = [
   {
     name: "Lao",
+    nativeName: "ພາສາລາວ",
     level: "Native",
     proficiency: 100,
-    icon: "🇱🇦",
-  },
-  {
-    name: "English",
-    level: "Basic",
-    proficiency: 40,
-    icon: "🇬🇧",
+    countryCode: "la",
   },
   {
     name: "Thai",
+    nativeName: "ภาษาไทย",
     level: "Conversational",
     proficiency: 80,
-    icon: "🇹🇭",
+    countryCode: "th",
+  },
+  {
+    name: "English",
+    nativeName: "English",
+    level: "Basic",
+    proficiency: 40,
+    countryCode: "gb",
   },
 ];
 
-export default function LanguageSkills() {
-  const getProficiencyColor = (proficiency: number) => {
-    if (proficiency >= 80) return "bg-emerald-500";
-    if (proficiency >= 60) return "bg-blue-500";
-    if (proficiency >= 40) return "bg-amber-500";
-    return "bg-gray-400";
-  };
+const SEGMENTS = 5;
 
+export default function LanguageSkills() {
   return (
-    <section
-      id="languages"
-      className="py-16 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950"
-    >
+    <section id="languages" className="py-16 bg-transparent">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -62,69 +59,71 @@ export default function LanguageSkills() {
           </p>
         </motion.div>
 
-        <div className="grid gap-8 md:grid-cols-3">
-          {languages.map((language, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              whileHover={{
-                y: -8,
-                boxShadow:
-                  "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
-              }}
-              transition={{
-                duration: 0.5,
-                delay: index * 0.15,
-                type: "spring",
-                stiffness: 150,
-              }}
-              viewport={{ once: true, margin: "-50px" }}
-              className="group relative overflow-hidden bg-white dark:bg-gray-800 rounded-2xl shadow-md hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-transparent to-blue-50 dark:to-gray-700/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-              <div className="relative p-6 z-10">
-                <div className="flex items-start gap-5 mb-5">
-                  <span className="text-4xl mt-1">{language.icon}</span>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-800 dark:text-white">
+        <div className="grid gap-6 md:grid-cols-3">
+          {languages.map((language, index) => {
+            const filled = Math.round((language.proficiency / 100) * SEGMENTS);
+            return (
+              <motion.article
+                key={language.name}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.4, delay: index * 0.1, ease: "easeOut" }}
+                viewport={{ once: true, margin: "-50px" }}
+                className="pro-card p-6"
+              >
+                {/* Header */}
+                <div className="flex items-center gap-4">
+                  <span
+                    className={`fi fi-${language.countryCode} fis !w-11 !h-11 rounded-lg ring-1 ring-white/10 shadow-md`}
+                    aria-hidden="true"
+                  />
+                  <div className="min-w-0">
+                    <h3 className="text-lg font-semibold text-white leading-tight">
                       {language.name}
                     </h3>
-                    <span className="inline-block px-2 py-1 mt-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 dark:bg-gray-700 dark:text-cyan-400">
-                      {language.level}
-                    </span>
+                    <p className="text-xs text-gray-400 truncate">{language.nativeName}</p>
                   </div>
                 </div>
 
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                      Proficiency level
-                    </span>
-                    <span className="text-sm font-bold text-gray-700 dark:text-gray-200">
-                      {language.proficiency}%
-                    </span>
-                  </div>
-                  <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2.5">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${language.proficiency}%` }}
-                      transition={{
-                        duration: 1.5,
-                        delay: 0.3,
-                        type: "spring",
-                        damping: 10,
-                      }}
-                      className={`h-2.5 rounded-full ${getProficiencyColor(
-                        language.proficiency
-                      )}`}
-                    />
-                  </div>
+                <div className="my-5 h-px bg-white/5" />
+
+                {/* Level */}
+                <div className="flex items-baseline justify-between">
+                  <span className="text-[11px] font-medium uppercase tracking-wider text-gray-500">
+                    Level
+                  </span>
+                  <span className="text-sm font-semibold text-cyan-300">{language.level}</span>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+
+                {/* Segmented meter */}
+                <div
+                  className="mt-3 grid gap-1.5"
+                  style={{ gridTemplateColumns: `repeat(${SEGMENTS}, minmax(0, 1fr))` }}
+                  role="meter"
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                  aria-valuenow={language.proficiency}
+                  aria-label={`${language.name} proficiency`}
+                >
+                  {Array.from({ length: SEGMENTS }).map((_, i) => (
+                    <motion.span
+                      key={i}
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.3, delay: 0.2 + i * 0.08 }}
+                      className={`h-1.5 origin-left rounded-full ${
+                        i < filled
+                          ? "bg-gradient-to-r from-cyan-400 to-sky-500"
+                          : "bg-white/10"
+                      }`}
+                    />
+                  ))}
+                </div>
+              </motion.article>
+            );
+          })}
         </div>
 
         <motion.div
@@ -132,7 +131,7 @@ export default function LanguageSkills() {
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
           viewport={{ once: true }}
-          className="mt-16 text-center"
+          className="mt-12 text-center"
         >
           <p className="text-gray-500 dark:text-gray-400 text-sm">
             * Proficiency levels based on self-assessment and practical usage

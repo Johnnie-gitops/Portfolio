@@ -6,7 +6,7 @@ import profileImage from "./../../../../public/images/profile.jpg";
 
 export default function Hero() {
   return (
-    <section className="relative py-16 md:py-24 flex flex-col items-center justify-center text-left bg-white dark:bg-gray-950 overflow-hidden">
+    <section className="relative py-16 md:py-24 flex flex-col items-center justify-center text-left bg-transparent overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-10 w-full">
         <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
           {/* Profile Image */}

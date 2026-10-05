@@ -17,7 +17,7 @@ export default function Header() {
   ]
 
   return (
-    <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-gray-200 dark:border-gray-700">
+    <header className="bg-gray-950/60 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-cyan-500/20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <motion.div

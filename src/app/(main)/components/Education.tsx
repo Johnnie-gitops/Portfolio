@@ -1,17 +1,18 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { GraduationCap, BookOpen, Trophy, MapPin } from 'lucide-react'
+import { GraduationCap, MapPin, CheckCircle2, Terminal, Code2 } from 'lucide-react'
 
 export default function Education() {
   const educationData = [
     {
-      id: 1,
+      id: "EDU_01",
       degree: "Bachelor of Electronic Engineering",
       institution: "National University of Laos",
-      year: "2015 - 2019",
+      year: "2015 — 2019",
+      status: "GRADUATED",
       location: "Vientiane Capital, Lao PDR",
-      description: "Comprehensive program covering electronic systems design, circuit theory, and engineering principles.",
+      description: "Rigorous curriculum emphasizing electronic circuits, digital logic architectures, signal processing, and microprocessor system control.",
       courses: [
         "Electronic Circuits", 
         "Digital Systems", 
@@ -20,17 +21,18 @@ export default function Education() {
         "Microprocessors"
       ],
       achievements: [
-        "Completed degree in standard duration",
-        "Practical project experience in electronics design"
+        "Completed degree program in standard duration with strong lab proficiency",
+        "Practical engineering experience in hardware circuit design and troubleshooting"
       ]
     },
     {
-      id: 2,
+      id: "EDU_02",
       degree: "English for Profession",
       institution: "Romeo English Academy",
-      year: "2018 - 2020",
+      year: "2018 — 2020",
+      status: "COMPLETED",
       location: "Vientiane Capital, Lao PDR",
-      description: "Specialized English language training focused on professional communication and technical vocabulary.",
+      description: "Advanced professional English curriculum specializing in technical writing, engineering presentations, and international team communication.",
       courses: [
         "Technical Writing", 
         "Professional Communication", 
@@ -38,15 +40,16 @@ export default function Education() {
         "Business English"
       ],
       achievements: [
-        "Improved professional communication skills",
-        "Enhanced technical documentation abilities"
+        "Elevated cross-border technical collaboration and documentation fluency",
+        "Specialized vocabulary for IT infrastructure, system specs, and manuals"
       ]
     }
   ]
 
   return (
-    <section id="education" className="py-16 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
+    <section id="education" className="py-16 bg-transparent">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -54,101 +57,118 @@ export default function Education() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-3">
-            Education <span className="text-blue-600 dark:text-cyan-400">Background</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-400/20 bg-cyan-400/5 mb-3">
+            <Terminal className="w-3.5 h-3.5 text-cyan-400" />
+            <span className="font-mono text-xs uppercase tracking-widest text-cyan-300">
+              ACADEMIC_RECORD // EDUCATION
+            </span>
+          </div>
+          <h2 className="text-4xl font-bold text-white mb-3 tracking-tight">
+            Education <span className="text-cyan-400">Background</span>
           </h2>
-          <div className="w-20 h-1 mx-auto bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full mb-4"></div>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            My academic journey and qualifications
+          <div className="w-16 h-0.5 mx-auto bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mb-4"></div>
+          <p className="text-base text-gray-400 max-w-2xl mx-auto">
+            My academic credentials, core technical competencies, and training
           </p>
         </motion.div>
 
-        <div className="space-y-8">
+        {/* Education Cards */}
+        <div className="space-y-6">
           {educationData.map((item, index) => (
-            <motion.div
+            <motion.article
               key={item.id}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              whileHover={{ y: -5 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -4 }}
               transition={{ 
-                duration: 0.5,
-                delay: index * 0.15,
-                type: "spring",
-                stiffness: 150
+                duration: 0.45,
+                delay: index * 0.12,
+                ease: "easeOut"
               }}
               viewport={{ once: true, margin: "-50px" }}
-              className="group relative overflow-hidden bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
+              className="pro-card p-6 sm:p-8 relative"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-transparent to-blue-50 dark:to-gray-700/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              
-              <div className="relative p-8 z-10">
-                <div className="flex items-start gap-5 mb-5">
-                  <div className="p-3 rounded-xl bg-blue-100 dark:bg-gray-700 text-blue-600 dark:text-cyan-400">
-                    <GraduationCap size={22} />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-800 dark:text-white">{item.degree}</h3>
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4 mt-2">
-                      <p className="text-lg font-medium text-blue-600 dark:text-cyan-400">{item.institution}</p>
-                      <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
-                        <MapPin size={16} className="text-blue-500 dark:text-cyan-400" />
-                        <span className="text-sm">{item.location}</span>
-                      </div>
-                    </div>
-                    <span className="inline-block mt-3 px-3 py-1 text-sm font-medium rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300">
-                      {item.year}
-                    </span>
-                  </div>
+              {/* Card Meta Bar */}
+              <div className="flex flex-wrap items-center justify-between gap-3 pb-5 border-b border-white/5">
+                <div className="flex items-center gap-2.5 font-mono text-xs">
+                  <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
+                  <span className="text-cyan-300 font-semibold">{item.id}</span>
+                  <span className="text-gray-500">{"//"}</span>
+                  <span className="text-gray-400 uppercase tracking-wider">{item.status}</span>
                 </div>
 
-                <p className="text-gray-600 dark:text-gray-400 mb-6">{item.description}</p>
+                <div className="flex items-center gap-2 font-mono text-xs text-gray-300 px-3 py-1 rounded-full border border-white/10 bg-white/[0.03]">
+                  <span>{item.year}</span>
+                </div>
+              </div>
 
-                <div className="grid gap-6 md:grid-cols-2">
-                  <div>
-                    <h4 className="font-semibold text-lg text-gray-700 dark:text-gray-300 mb-4 flex items-center gap-3">
-                      <BookOpen size={18} className="text-blue-500 dark:text-cyan-400" />
-                      Key Subjects
-                    </h4>
-                    <div className="flex flex-wrap gap-3">
-                      {item.courses.map((course, i) => (
-                        <motion.span
-                          key={i}
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          transition={{ duration: 0.3, delay: 0.2 + i * 0.05 }}
-                          viewport={{ once: true }}
-                          className="inline-block bg-blue-50 dark:bg-gray-700 px-4 py-1.5 rounded-full text-sm font-medium text-blue-700 dark:text-cyan-400"
-                        >
-                          {course}
-                        </motion.span>
-                      ))}
-                    </div>
+              {/* Title & Organization */}
+              <div className="mt-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="flex items-start gap-4">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-cyan-400/10 text-cyan-300 ring-1 ring-cyan-400/20">
+                    <GraduationCap className="h-6 w-6" />
                   </div>
-
                   <div>
-                    <h4 className="font-semibold text-lg text-gray-700 dark:text-gray-300 mb-4 flex items-center gap-3">
-                      <Trophy size={18} className="text-green-500 dark:text-emerald-400" />
-                      Key Achievements
-                    </h4>
-                    <ul className="space-y-3">
-                      {item.achievements.map((achievement, i) => (
-                        <motion.li
-                          key={i}
-                          initial={{ opacity: 0, x: -10 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.3, delay: 0.3 + i * 0.05 }}
-                          viewport={{ once: true }}
-                          className="flex items-start gap-3 text-gray-600 dark:text-gray-400"
-                        >
-                          <span className="text-green-500 dark:text-emerald-400 mt-1.5">•</span>
-                          <span>{achievement}</span>
-                        </motion.li>
-                      ))}
-                    </ul>
+                    <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug">
+                      {item.degree}
+                    </h3>
+                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1 text-sm text-gray-300">
+                      <span className="text-cyan-300 font-medium">{item.institution}</span>
+                      <span className="text-gray-500 hidden sm:inline">•</span>
+                      <span className="flex items-center gap-1.5 text-gray-400 text-xs">
+                        <MapPin className="h-3.5 w-3.5 text-cyan-400" />
+                        {item.location}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </motion.div>
+
+              {/* Description */}
+              <div className="mt-5 pl-4 border-l-2 border-cyan-400/30 text-sm text-gray-300 leading-relaxed">
+                {item.description}
+              </div>
+
+              {/* Detail Grid: Subjects & Achievements */}
+              <div className="mt-6 pt-5 border-t border-white/5 grid gap-6 md:grid-cols-2">
+                {/* Subjects */}
+                <div>
+                  <h4 className="font-mono text-xs uppercase tracking-wider text-gray-400 mb-3 flex items-center gap-2">
+                    <Code2 className="h-3.5 w-3.5 text-cyan-400" />
+                    Key Subjects Studied
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {item.courses.map((course, i) => (
+                      <span
+                        key={i}
+                        className="font-mono text-xs px-2.5 py-1 rounded border border-cyan-400/15 bg-cyan-400/5 text-cyan-200/90 hover:border-cyan-400/40 transition-colors"
+                      >
+                        {course}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Achievements */}
+                <div>
+                  <h4 className="font-mono text-xs uppercase tracking-wider text-gray-400 mb-3 flex items-center gap-2">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
+                    Key Milestones
+                  </h4>
+                  <ul className="space-y-2">
+                    {item.achievements.map((achievement, i) => (
+                      <li
+                        key={i}
+                        className="flex items-start gap-2.5 text-xs text-gray-300 leading-relaxed"
+                      >
+                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-400 flex-shrink-0" />
+                        <span>{achievement}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </motion.article>
           ))}
         </div>
       </div>

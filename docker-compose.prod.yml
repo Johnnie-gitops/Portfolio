@@ -9,7 +9,7 @@ services:
     image: portfolio:latest
     container_name: portfolio-prod
     ports:
-      - "3000:3000"
+      - "${HOST_PORT:-3000}:3000"
     environment:
       - NODE_ENV=production
     # env_file:

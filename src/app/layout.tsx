@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
+import DigitalBackground from "./(main)/components/DigitalBackground";
 
 const inter = Inter({ subsets: ['latin'] })
+const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' })
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -48,8 +50,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} bg-gray-50 text-gray-800`}>
+    <html lang="en" className={`dark scroll-smooth ${playfair.variable}`}>
+      <body className={`${inter.className} relative min-h-screen text-gray-200 antialiased`}>
+        <DigitalBackground />
         {children}
       </body>
     </html>

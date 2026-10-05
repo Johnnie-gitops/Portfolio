@@ -19,7 +19,9 @@ ENV NODE_ENV=development \
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 EXPOSE 3000
-CMD ["npm", "run", "dev", "--", "-H", "0.0.0.0"]
+# Turbopack doesn't support polling; webpack + WATCHPACK_POLLING gives reliable
+# hot reload on Windows/macOS bind mounts.
+CMD ["npx", "next", "dev", "-H", "0.0.0.0"]
 
 # ---------- Build ----------
 FROM base AS builder

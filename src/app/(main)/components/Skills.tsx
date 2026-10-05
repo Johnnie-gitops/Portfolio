@@ -1,62 +1,66 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { Code2, ServerCog, Network, type LucideIcon } from 'lucide-react'
 
 interface SkillCategory {
   name: string;
-  icon: string;
+  description: string;
+  icon: LucideIcon;
   skills: {
     name: string;
     proficiency: number;
-    icon: string;
   }[];
 }
 
 const skillsData: SkillCategory[] = [
   {
     name: "Software",
-    icon: "💻",
+    description: "Applications & development",
+    icon: Code2,
     skills: [
-      { name: "Microsoft Office", proficiency: 80, icon: "📊" },
-      { name: "Adobe Photoshop", proficiency: 35, icon: "🎨" },
-      { name: "SQL Server", proficiency: 25, icon: "🗃️" },
-      { name: "HTML/CSS/PHP", proficiency: 40, icon: "🌐" },
-      { name: "Node/React", proficiency: 65, icon: "⚛️" },
+      { name: "Microsoft Office", proficiency: 80 },
+      { name: "Adobe Photoshop", proficiency: 35 },
+      { name: "SQL Server", proficiency: 25 },
+      { name: "HTML/CSS/PHP", proficiency: 40 },
+      { name: "Node/React", proficiency: 65 },
     ]
   },
   {
     name: "Technical",
-    icon: "🛠️",
+    description: "Systems & infrastructure",
+    icon: ServerCog,
     skills: [
-      { name: "Windows Server", proficiency: 40, icon: "🪟" },
-      { name: "Linux Admin", proficiency: 82, icon: "🐧" },
-      { name: "VMware", proficiency: 80, icon: "🖥️" },
-      { name: "Docker", proficiency: 75, icon: "🐳" },
-      { name: "Firewalls", proficiency: 85, icon: "🛡️" },
+      { name: "Windows Server", proficiency: 40 },
+      { name: "Linux Admin", proficiency: 82 },
+      { name: "VMware", proficiency: 80 },
+      { name: "Docker", proficiency: 75 },
+      { name: "Firewalls", proficiency: 85 },
     ]
   },
   {
     name: "Networking",
-    icon: "🌐",
+    description: "Protocols & security",
+    icon: Network,
     skills: [
-      { name: "TCP/IP", proficiency: 50, icon: "📡" },
-      { name: "Load Balancing", proficiency: 85, icon: "⚖️" },
-      { name: "SSL", proficiency: 80, icon: "🔒" },
-      { name: "IPv6", proficiency: 70, icon: "6️⃣" },
+      { name: "TCP/IP", proficiency: 50 },
+      { name: "Load Balancing", proficiency: 85 },
+      { name: "SSL", proficiency: 80 },
+      { name: "IPv6", proficiency: 70 },
     ]
   }
 ]
 
-export default function Skills() {
-  const getProgressColor = (proficiency: number) => {
-    if (proficiency >= 80) return 'bg-emerald-500';
-    if (proficiency >= 60) return 'bg-blue-500';
-    if (proficiency >= 40) return 'bg-amber-500';
-    return 'bg-gray-400';
-  }
+const getLevel = (proficiency: number) => {
+  if (proficiency >= 80) return { label: 'Expert', className: 'text-emerald-300 bg-emerald-400/10 ring-emerald-400/20' }
+  if (proficiency >= 60) return { label: 'Advanced', className: 'text-cyan-300 bg-cyan-400/10 ring-cyan-400/20' }
+  if (proficiency >= 40) return { label: 'Intermediate', className: 'text-sky-300 bg-sky-400/10 ring-sky-400/20' }
+  return { label: 'Basic', className: 'text-gray-300 bg-white/5 ring-white/10' }
+}
 
+export default function Skills() {
   return (
-    <section id="skills" className="py-16 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
+    <section id="skills" className="py-16 bg-transparent">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -74,71 +78,65 @@ export default function Skills() {
           </p>
         </motion.div>
 
-        <div className="grid gap-8 md:grid-cols-3">
-          {skillsData.map((category, catIndex) => (
-            <motion.div
-              key={catIndex}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              whileHover={{ y: -8 }}
-              transition={{ 
-                duration: 0.5,
-                delay: catIndex * 0.15,
-                type: "spring",
-                stiffness: 150
-              }}
-              viewport={{ once: true, margin: "-50px" }}
-              className="group relative overflow-hidden bg-white dark:bg-gray-800 rounded-2xl shadow-md hover:shadow-xl transition-all border border-gray-100 dark:border-gray-700"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-transparent to-blue-50 dark:to-gray-700/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              
-              <div className="relative p-6 z-10">
-                <div className="flex items-center gap-4 mb-5">
-                  <span className="text-3xl">{category.icon}</span>
-                  <h3 className="text-xl font-bold text-gray-800 dark:text-white">
-                    {category.name}
-                  </h3>
+        <div className="grid gap-6 md:grid-cols-3">
+          {skillsData.map((category, catIndex) => {
+            const Icon = category.icon
+            return (
+              <motion.article
+                key={category.name}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.4, delay: catIndex * 0.1, ease: 'easeOut' }}
+                viewport={{ once: true, margin: "-50px" }}
+                className="pro-card p-6"
+              >
+                {/* Header */}
+                <div className="flex items-center gap-4">
+                  <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-lg bg-cyan-400/10 text-cyan-300 ring-1 ring-cyan-400/20">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-white leading-tight">
+                      {category.name}
+                    </h3>
+                    <p className="text-xs text-gray-400">{category.description}</p>
+                  </div>
+                  <span className="ml-auto font-mono text-xs text-gray-500">
+                    {String(category.skills.length).padStart(2, '0')}
+                  </span>
                 </div>
-                
-                <div className="space-y-5">
-                  {category.skills.map((skill, skillIndex) => (
-                    <motion.div
-                      key={skillIndex}
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      transition={{ duration: 0.3, delay: skillIndex * 0.05 }}
-                      className="flex items-start gap-4"
-                    >
-                      <span className="text-2xl mt-1">{skill.icon}</span>
-                      <div className="flex-1">
-                        <div className="flex justify-between items-center mb-2">
-                          <span className="font-medium text-gray-700 dark:text-gray-300">
-                            {skill.name}
-                          </span>
-                          <span className="text-sm font-bold text-gray-700 dark:text-gray-200">
-                            {skill.proficiency}%
+
+                <div className="my-5 h-px bg-white/5" />
+
+                {/* Skills */}
+                <ul className="space-y-4">
+                  {category.skills.map((skill, skillIndex) => {
+                    const level = getLevel(skill.proficiency)
+                    return (
+                      <li key={skill.name}>
+                        <div className="mb-1.5 flex items-center justify-between gap-2">
+                          <span className="text-sm font-medium text-gray-200">{skill.name}</span>
+                          <span className={`rounded px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide ring-1 ${level.className}`}>
+                            {level.label}
                           </span>
                         </div>
-                        <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2.5">
+                        <div className="h-1 w-full overflow-hidden rounded-full bg-white/10">
                           <motion.div
                             initial={{ width: 0 }}
                             whileInView={{ width: `${skill.proficiency}%` }}
-                            transition={{ 
-                              duration: 1.5, 
-                              delay: 0.3,
-                              type: "spring",
-                              damping: 10
-                            }}
-                            className={`h-2.5 rounded-full ${getProgressColor(skill.proficiency)}`}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.9, delay: 0.15 + skillIndex * 0.06, ease: 'easeOut' }}
+                            className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-sky-500"
                           />
                         </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
+                      </li>
+                    )
+                  })}
+                </ul>
+              </motion.article>
+            )
+          })}
         </div>
 
         <motion.div
@@ -146,7 +144,7 @@ export default function Skills() {
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
           viewport={{ once: true }}
-          className="mt-16 text-center"
+          className="mt-12 text-center"
         >
           <p className="text-gray-500 dark:text-gray-400 text-sm">
             * Proficiency levels based on professional experience and self-assessment
